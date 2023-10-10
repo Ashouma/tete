@@ -29,13 +29,16 @@
                 }
                 //koko
                 move(mouseX, mouseY) {
-                    this.sx = (mouseX - this.x) / 10;
-                    this.sy = (mouseY - this.y) / 10;
+                    
+                    this.sx = mouseX;
+                    this.sy = mouseY;
                 }
                 tick() {
                     this.x += this.sx;
                     this.y += this.sy;
                     ctx.drawImage(this.img, this.x - 50, this.y - 50);
+                    this.sx = 0;
+                    this.sy = 0;
                 }
                 shoot(){
                     bullets.push(new Bullet(this.x, this.y, 0, -25, true));
@@ -93,6 +96,7 @@
             let count = 0;
             let interval = 50;
             let timerId;
+            let keyCode = { key : null };
             let bullets = [];
             let enemies = [];
             const stars = [];
@@ -102,9 +106,12 @@
                 ctx.font = "32px 'Times New Roman'";
                 ship = new Ship();
                 back = document.getElementById("back");
+                /*
                 window.onpointermove = (e) => {
                     ship.move(e.clientX, e.clientY);
                 };
+                */
+                window.addEventListener("keydown", push_Keydown);
                 window.onpointerdown = (e) => {
                     ship.shoot();
                 };
@@ -153,6 +160,25 @@
                 return Math.sqrt(
                     Math.abs(e0.x - e1.x) ** 2 + Math.abs(e0.y - e1.y) ** 2
                 );
+            }
+            function push_Keydown(event){
+                keyCode = event.key;
+                console.log(keyCode);
+                if ("a" == keyCode) { //押したキーが合っていたら
+                    ship.move(-20, 0);
+                }
+                if ("d" == keyCode) { //押したキーが合っていたら
+                    ship.move(20, 0);
+                }
+                if ("w" == keyCode) { //押したキーが合っていたら
+                    ship.move(0, -20);
+                }
+                if ("s" == keyCode) { //押したキーが合っていたら
+                    ship.move(0, 20);
+                }
+                if(null == keyCode) {
+                    ship.move(0,0);
+                }
             }
         </script>
     </head>
