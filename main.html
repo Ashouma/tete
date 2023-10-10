@@ -179,6 +179,9 @@
                 if(null == keyCode) {
                     ship.move(0,0);
                 }
+                if ("b" == keyCode) { //押したキーが合っていたら
+                    ship.shoot();
+                }
             }
         </script>
     </head>
