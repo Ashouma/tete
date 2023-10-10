@@ -7,6 +7,8 @@
             "use strict";
             let screanX = 600;
             let screanY = 600;
+            let minasscreanX = 0;
+            let minasscreanY = 0;
             class Star {
                 constructor() {
                     this.x = Math.random() * screanX;
@@ -31,11 +33,25 @@
                 }
                 //koko
                 move(mouseX, mouseY) {
-                    if (this.x < screanX) {
-                       this.sx = mouseX; 
+                    if (mouseX > 0) {
+                        if (this.x < screanX) {
+                            this.sx = mouseX; 
+                        }
                     }
-                    if (this.y < screanY) {
-                        this.sy = mouseY;
+                    if (mouseX < 0) {
+                        if (this.x > minasscreanX) {
+                            this.sx = mouseX; 
+                        }
+                    }
+                    if (mouseY > 0) {
+                        if (this.y < screanY) {
+                            this.sy = mouseY; 
+                        }
+                    }
+                    if (mouseY < 0) {
+                        if (this.y > minasscreanY) {
+                            this.sy = mouseY; 
+                        }
                     }
                 }
                 tick() {
