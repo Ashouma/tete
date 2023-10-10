@@ -37,8 +37,10 @@
                     this.x += this.sx;
                     this.y += this.sy;
                     ctx.drawImage(this.img, this.x - 50, this.y - 50);
+                    /*
                     this.sx = 0;
                     this.sy = 0;
+                    */
                 }
                 shoot(){
                     bullets.push(new Bullet(this.x, this.y, 0, -25, true));
