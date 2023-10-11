@@ -34,23 +34,35 @@
                 //koko
                 move(mouseX, mouseY) {
                     if (mouseX > 0) {
-                        if (this.x < screanX) {
+                        if ((this.x + mouseX) < screanX) {
                             this.sx = mouseX; 
+                        }
+                        else{
+                            this.sx = screanX - this.x;
                         }
                     }
                     if (mouseX < 0) {
-                        if (this.x > minasscreanX) {
+                        if (this.x - mouseX > minasscreanX) {
                             this.sx = mouseX; 
+                        }
+                        else{
+                            this.sx = 0 - this.x;
                         }
                     }
                     if (mouseY > 0) {
-                        if (this.y < screanY) {
+                        if (this.y + mouseY < screanY) {
                             this.sy = mouseY; 
+                        }
+                        else{
+                            this.sy = screanY - this.y;
                         }
                     }
                     if (mouseY < 0) {
-                        if (this.y > minasscreanY) {
+                        if (this.y - mouseY > minasscreanY) {
                             this.sy = mouseY; 
+                        }
+                        else{
+                            this.sy = screanY - this.y;
                         }
                     }
                 }
