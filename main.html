@@ -32,38 +32,20 @@
                     this.sy = 0;
                 }
                 //koko
-                move(mouseX, mouseY, point) {
-                    if (point == 1) {
-                        if ((this.x + mouseX) < screanX) {
-                            this.sx = mouseX; 
-                        }
-                        else{
-                            this.sx = screanX - this.x;
-                        }
+                move(mouseX, mouseY) {
+                    this.sx = ((this.x + mouseX) - this.x) / 8; // マウスx方向へ移動
+                    this.sy = ((this.y + mouseY) - this.y) / 8; // マウスy方向へ移動
+                    if(this.sx + this.x > screanX){
+                        this.sx = screanX - this.x;
                     }
-                    else if (point == 2) {
-                        if (this.x + mouseX > minasscreanX) {
-                            this.sx = mouseX; 
-                        }
-                        else{
-                            this.sx = 0 - this.x;
-                        }
+                    else if(this.sx + this.x < minasscreanX){
+                        this.sx = this.x - minasscreanX;
                     }
-                    else if (point == 3) {
-                        if (this.y + mouseY < screanY) {
-                            this.sy = mouseY; 
-                        }
-                        else{
-                            this.sy = screanY - this.y;
-                        }
+                    if(this.sy + this.y > screanY){
+                        this.sy = screanY - this.y;
                     }
-                    else if (point == 4) {
-                        if (this.y + mouseY > minasscreanY) {
-                            this.sy = mouseY; 
-                        }
-                        else{
-                            this.sy = minasscreanY - this.y;
-                        }
+                    else if(this.sy + this.y < minasscreanY){
+                        this.sy = this.y - minasscreanY;
                     }
                 }
                 tick() {
@@ -144,7 +126,35 @@
                     ship.move(e.clientX, e.clientY);
                 };
                 */
-                window.addEventListener("keydown", push_Keydown);
+                document.addEventListener("keydown", (e) =>{
+                    if ("KeyA" == e.code) { //押したキーが合っていたら
+                        ship.move(-100, 0);
+                    }
+                    else if ("KeyD" == e.code) { //押したキーが合っていたら
+                        ship.move(100, 0);
+                    }
+                    else if ("KeyW" == e.code) { //押したキーが合っていたら
+                        ship.move(0, -100);
+                    }
+                    else if ("KeyS" == e.code) { //押したキーが合っていたら
+                        ship.move(0, 100);
+                    }
+                    else if ("KeyB" == e.code) { //押したキーが合っていたら
+                        ship.shoot();
+                    }
+                    else if ("KeyJ" == e.code) { //押したキーが合っていたら
+                        ship.move(-300, 0);
+                    }
+                    else if ("KeyL" == e.code) { //押したキーが合っていたら
+                        ship.move(300, 0);
+                    }
+                    else if ("KeyI" == e.code) { //押したキーが合っていたら
+                        ship.move(0, -200);
+                    }
+                    else if ("KeyK" == e.code) { //押したキーが合っていたら
+                        ship.move(0, 200);
+                    }
+                });
                 window.onpointerdown = (e) => {
                     ship.shoot();
                 };
@@ -193,37 +203,6 @@
                 return Math.sqrt(
                     Math.abs(e0.x - e1.x) ** 2 + Math.abs(e0.y - e1.y) ** 2
                 );
-            }
-            function push_Keydown(event){
-                keyCode = event.key;
-                console.log(keyCode);
-                if ("a" == keyCode) { //押したキーが合っていたら
-                    ship.move(-50, 0,1);
-                }
-                if ("d" == keyCode) { //押したキーが合っていたら
-                    ship.move(50, 0,2);
-                }
-                if ("w" == keyCode) { //押したキーが合っていたら
-                    ship.move(0, -50,3);
-                }
-                if ("s" == keyCode) { //押したキーが合っていたら
-                    ship.move(0, 50,4);
-                }
-                if ("b" == keyCode) { //押したキーが合っていたら
-                    ship.shoot();
-                }
-                if ("j" == keyCode) { //押したキーが合っていたら
-                    ship.move(-300, 0,1);
-                }
-                if ("l" == keyCode) { //押したキーが合っていたら
-                    ship.move(300, 0,2);
-                }
-                if ("i" == keyCode) { //押したキーが合っていたら
-                    ship.move(0, -200,3);
-                }
-                if ("k" == keyCode) { //押したキーが合っていたら
-                    ship.move(0, 200,4);
-                }
             }
         </script>
     </head>
