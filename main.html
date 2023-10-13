@@ -64,7 +64,7 @@
                     this.img = document.getElementById("enemy");
                     this.x = Math.random() * 400 + 100;
                     this.y = 0;
-                    this.sx = Math.random() * 5 - 2.5;
+                    this.sx = Math.random() * 20 - 2.5;
                     this.sy = Math.random() * 15 + 15;
                     this.shoot = false;
                 }
@@ -76,8 +76,8 @@
 
                     if(this.shoot == false && this.sy < 0){
                         let theta = Math.atan2(ship.y - this.y, ship.x - this.x);
-                        let sx = Math.cos(theta) * 10;
-                        let sy = Math.sin(theta) * 10;
+                        let sx = Math.cos(theta) * 5;
+                        let sy = Math.sin(theta) * 5;
                         bullets.push(new Bullet(this.x, this.y, sx, sy, false));
                         this.shoot = true;
                     }
@@ -94,7 +94,7 @@
                 tick() {
                     this.x += this.sx;
                     this.y += this.sy;
-                    drawCircle(this.x, this.y, 5, this.isShip ? "blue" : "red");
+                    drawCircle(this.x, this.y, 7, this.isShip ? "blue" : "red");
                 }
             }
             function drawCircle(x,y,r,color){
@@ -173,7 +173,7 @@
                 ship.tick();
                 if(count % interval == 0){
                     enemies.push(new Enemy());
-                    interval= Math.max(5, interval - 5);
+                    interval= Math.max(12, interval - 5);
                 }
                 let gameOver = false;
                 enemies.forEach((e) => {
