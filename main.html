@@ -32,8 +32,8 @@
           this.sy = 0;
         }
         move(mouseX, mouseY) {
-          this.sx = (mouseX - this.x) / 5; // マウスx方向へ移動
-          this.sy = (mouseY - this.y) / 5; // マウスy方向へ移動
+          this.sx = (mouseX - this.x) / 15; // マウスx方向へ移動
+          this.sy = (mouseY - this.y) / 15; // マウスy方向へ移動
           if(this.sx + this.x > 900){
             this.sx = 900 - this.x;
           }
