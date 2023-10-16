@@ -34,6 +34,18 @@
         move(mouseX, mouseY) {
           this.sx = (mouseX - this.x) / 10; // マウスx方向へ移動
           this.sy = (mouseY - this.y) / 10; // マウスy方向へ移動
+          if(this.sx + this.x > 900){
+            this.sx = 900 - this.x;
+          }
+          else if(this.sx + this.x < -900){
+            this.sx = this.x - 900;
+          }
+          if(this.sy + this.y > 500){
+            this.sy = 500 - this.y;
+          }
+          else if(this.sy + this.y < -500){
+            this.sy = this.y - 500;
+          }
         }
         tick() {
           this.x += this.sx; // 速度sxを座標xに反映
@@ -51,12 +63,12 @@
           this.img = document.getElementById("enemy");
           this.x = Math.random() * 400 + 100; // x座標
           this.y = 0; // y座標
-          this.sx = Math.random() * 20 - 2.5; // x方向初速
-          this.sy = Math.random() * 15 + 15; // y方向初速
+          this.sx = Math.random() * 5 - 2.5; // x方向初速
+          this.sy = Math.random() * 15 + 5; // y方向初速
           this.shoot = false;
         }
         tick() {
-          this.sy -= 2; // 速度を減らす
+          this.sy -= 1; // 速度を減らす
           this.x += this.sx; // 速度sxを座標xに反映
           this.y += this.sy; // 速度syを座標yに反映
           ctx.drawImage(this.img, this.x - 50, this.y - 50);
@@ -84,7 +96,7 @@
         tick() {
           this.x += this.sx;
           this.y += this.sy;
-          drawCircle(this.x, this.y, 5, this.isShip ? "blue" : "red");
+          drawCircle(this.x, this.y, 7, this.isShip ? "blue" : "red");
         }
       }
 
@@ -102,7 +114,7 @@
       let ship; // 自機
       let back; // 背景画像
       let count = 0;  // 敵出現用カウンタ
-      let interval = 80; // 出現頻度
+      let interval = 50; // 出現頻度
       let timerId;  // タイマー
       let bullets = []; // 弾丸のリスト
       let enemies = []; // 敵のリスト
@@ -129,7 +141,7 @@
       function tick() {
         count++;
         ctx.fillStyle = "black";
-        ctx.fillRect(0, 0, 900, 400);
+        ctx.fillRect(0, 0, 900, 500);
         ctx.drawImage(back, 0, 0);
         stars.forEach((s) => s.tick()); // 星の移動
         ship.tick();
@@ -140,13 +152,13 @@
         let gameOver = false;
         enemies.forEach((e) => {
           e.tick(); // 敵を移動
-          if (dist(e, ship) < 100) {
+          if (dist(e, ship) < 70) {
             gameOver = true;  // 敵との距離が100未満⇒ゲームオーバー
           }
         });
         bullets.forEach((b) => {
           b.tick(); // 弾丸移動
-          if (!b.isShip && dist(b, ship) < 30) {
+          if (!b.isShip && dist(b, ship) < 20) {
             gameOver = true;  // 弾丸との距離が30未満⇒ゲームオーバー
           }
         });
