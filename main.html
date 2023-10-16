@@ -26,14 +26,14 @@
         // 自機クラス
         constructor() {
           this.img = document.getElementById("ship");
-          this.x = 300;
-          this.y = 500;
+          this.x = 450;
+          this.y = 300;
           this.sx = 0;
           this.sy = 0;
         }
         move(mouseX, mouseY) {
-          this.sx = (mouseX - this.x) / 10; // マウスx方向へ移動
-          this.sy = (mouseY - this.y) / 10; // マウスy方向へ移動
+          this.sx = (mouseX - this.x) / 5; // マウスx方向へ移動
+          this.sy = (mouseY - this.y) / 5; // マウスy方向へ移動
           if(this.sx + this.x > 900){
             this.sx = 900 - this.x;
           }
@@ -170,12 +170,12 @@
         });
         score += prevNum - enemies.length;
         ctx.fillStyle = "yellow";
-        ctx.fillText("SCORE:" + score, 100, 100);
+        ctx.fillText("SCORE:" + score, 50, 50);
 
         if (gameOver) {
           clearInterval(timerId);
           ctx.fillStyle = "yellow";
-          ctx.fillText("GAME OVER", 200, 300);
+          ctx.fillText("GAME OVER", 450, 200);
         }
       }
 
